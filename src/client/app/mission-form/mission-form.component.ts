@@ -17,10 +17,16 @@ export class MissionFormComponent implements OnInit {
     private missionsService: MissionsService,
     private modalCtrl: ModalController,
     private alertController: AlertController
-  ) {}
+  ) { }
 
   ngOnInit() {
-
+    const id = this.navParams.data.id;
+    if (id) {
+      this.mission$ = this.missionsService.getMissionById(id);
+    }
+    else {
+      this.mission$ = of({ active: false } as any);
+    }
   }
 
   close() {

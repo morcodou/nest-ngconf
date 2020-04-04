@@ -5,6 +5,7 @@ import { Roles } from '../util/roles.decorator';
 import { MissionsService } from './missions.service';
 import { GetUser } from '../util/getuser.decorator';
 import { classToPlain } from 'class-transformer';
+import { NOTFOUND } from 'dns';
 
 @Controller('missions')
 export class MissionsController {
@@ -12,8 +13,11 @@ export class MissionsController {
 
   @Get()
   async getMissions() {
-    const  missions = this.missionsService.getMissions();
-    return missions;
+    return this.missionsService.getMissions();
   }
 
+  @Get(':id')
+  async getMission(@Param('id') id: number) {
+   return this.missionsService.getMission(id);
+  }
 }
