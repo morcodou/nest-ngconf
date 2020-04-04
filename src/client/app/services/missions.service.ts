@@ -7,5 +7,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MissionsService {
-  constructor(private httpClient: HttpClient) {}
+  private readonly url = 'http://localhost:3000/missions';
+  constructor(private httpClient: HttpClient) { }
+
+  getMissions() {
+    return this.httpClient
+      .get<{ data: Mission[] }>(this.url)
+      .pipe(map(response => response.data));
+  }
 }

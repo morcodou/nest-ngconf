@@ -13,10 +13,10 @@ import { MissionFormComponent } from '../mission-form/mission-form.component';
 export class HomePage implements OnInit {
   missions: Observable<Mission[]>;
 
-  constructor(private missionsService: MissionsService, private modalController: ModalController) {}
+  constructor(private missionsService: MissionsService, private modalController: ModalController) { }
 
   ngOnInit() {
-
+    this.missions = this.missionsService.getMissions();
   }
 
   async openMission(mission: Mission) {

@@ -4,9 +4,16 @@ import { User } from '../models/user.model';
 import { Roles } from '../util/roles.decorator';
 import { MissionsService } from './missions.service';
 import { GetUser } from '../util/getuser.decorator';
+import { classToPlain } from 'class-transformer';
 
 @Controller('missions')
 export class MissionsController {
-  constructor(private missionsService: MissionsService) {}
+  constructor(private missionsService: MissionsService) { }
+
+  @Get()
+  async getMissions() {
+    const  missions = this.missionsService.getMissions();
+    return missions;
+  }
 
 }

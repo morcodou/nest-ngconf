@@ -5,5 +5,7 @@ import { MissionEntity } from '../data/mission.entity';
 @Injectable()
 export class MissionsService {
   constructor(private missionsRepository: MissionsRepository) {}
-
+  getMissions() {
+    return this.missionsRepository.getList();
+  }
 }
