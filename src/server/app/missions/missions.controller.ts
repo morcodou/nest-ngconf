@@ -18,21 +18,25 @@ export class MissionsController {
 
   @Get(':id')
   async getMission(@Param('id') id: number) {
-   return this.missionsService.getMission(id);
+    return this.missionsService.getMission(id);
   }
 
   @Post()
-  async createMission(@Body() mission: MissionEntity) {
+  @Roles('user')
+  async createMission(@Body() mission: MissionEntity, @GetUser() user: User) {
+    mission.createdBy = user.id;
     return this.missionsService.createMission(mission);
   }
 
   @Put(':id')
+  @Roles('user')
   async updateMission(@Param('id') id: number, @Body() mission: MissionEntity) {
     return this.missionsService.updateMission(id, mission);
   }
 
   @Delete(':id')
+  @Roles('admin')
   async deleteMission(@Param('id') id: number) {
-   return this.missionsService.deleteMission(id);
+    return this.missionsService.deleteMission(id);
   }
 }
